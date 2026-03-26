@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Style Questions | SyllabusScorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-offwhite">
+    <nav>
+        <a href="dashboard.html" class="logo">
+            <span class="green-s">S</span>yllabusScorer
+        </a>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">← Back to Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <main class="dashboard-page">
+        <h1 class="welcome-title roll-item">Exam Style Questions</h1>
+        <div class="study-intro roll-item">
+            Challenge yourself with customized questions designed to mimic real SEC exam conditions for your chosen subjects.
+        </div>
+        
+        <div id="subjects-container" class="choices-grid">
+            <!-- Dynamic Subjects -->
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const subjects = JSON.parse(localStorage.getItem('ss_subjects') || '[]');
+            const container = document.getElementById('subjects-container');
+            
+            if (subjects.length === 0) {
+                container.innerHTML = '<div class="roll-item" style="grid-column: 1/-1;"><p>No subjects selected. <a href="subject-selection.html" style="color: var(--accent-green);">Click here to select subjects.</a></p></div>';
+                return;
+            }
+
+            subjects.forEach(subj => {
+                const colorVar = getSubjectColor(subj);
+                const div = document.createElement('div');
+                div.className = 'subject-example roll-item visible';
+                div.style.setProperty('--subj-color', `var(${colorVar})`);
+                div.style.borderLeft = '5px solid var(--subj-color)';
+                div.innerHTML = `
+                    <div>
+                        <h4 style="font-size: 1.3rem; color: var(--subj-color);">${subj} Practice</h4>
+                        <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">Simulated questions based on recent SEC trends.</p>
+                    </div>
+                    <div style="margin-top: 2rem; text-align: right;">
+                        <button class="btn btn-primary" style="background: var(--subj-color); border: none; font-size: 0.85rem; padding: 0.6rem 1.5rem;">Start Mock Session</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        });
+
+        function getSubjectColor(subject) {
+            const s = subject.toLowerCase();
+            if (s.includes('maths')) return '--subj-maths';
+            if (s.includes('english')) return '--subj-english';
+            if (s.includes('irish')) return '--subj-irish';
+            if (s.includes('biology')) return '--subj-biology';
+            if (s.includes('chemistry')) return '--subj-chemistry';
+            if (s.includes('physics')) return '--subj-physics';
+            if (s.includes('science')) return '--subj-science';
+            if (s.includes('history')) return '--subj-history';
+            if (s.includes('geography')) return '--subj-geography';
+            if (s.includes('business')) return '--subj-business';
+            if (s.includes('french')) return '--subj-french';
+            if (s.includes('german')) return '--subj-german';
+            if (s.includes('religion')) return '--subj-religion';
+            if (s.includes('spanish')) return '--subj-spanish';
+            if (s.includes('home ec')) return '--subj-homeec';
+            if (s.includes('art')) return '--subj-art';
+            if (s.includes('music')) return '--subj-music';
+            return '--subj-default';
+        }
+    </script>
+</body>
+</html>

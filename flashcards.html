@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards | SyllabusScorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-offwhite">
+    <nav>
+        <a href="dashboard.html" class="logo">
+            <span class="green-s">S</span>yllabusScorer
+        </a>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">← Back to Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <main class="dashboard-page">
+        <h1 class="welcome-title roll-item">Active Recall Flashcards</h1>
+        <div class="study-intro roll-item">
+            Harness the power of active recall with personalized flashcard decks for each of your selected subjects.
+        </div>
+        
+        <div id="subjects-container" class="choices-grid">
+            <!-- Dynamic Decks -->
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const subjects = JSON.parse(localStorage.getItem('ss_subjects') || '[]');
+            const container = document.getElementById('subjects-container');
+            
+            if (subjects.length === 0) {
+                container.innerHTML = '<div class="roll-item" style="grid-column: 1/-1;"><p>No subjects selected. <a href="subject-selection.html" style="color: var(--accent-green);">Click here to select subjects.</a></p></div>';
+                return;
+            }
+
+            subjects.forEach(subj => {
+                const colorVar = getSubjectColor(subj);
+                const div = document.createElement('div');
+                div.className = 'flashcard roll-item visible';
+                div.style.setProperty('--subj-color', `var(${colorVar})`);
+                div.innerHTML = `
+                    <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--subj-color); letter-spacing: 0.05em;">${subj}</span>
+                    <h3 style="margin: 1.2rem 0; font-size: 1.4rem;">Memory Deck</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.4;">Active recall cards focused on core definitions and concepts.</p>
+                    <div style="margin-top: auto; padding-top: 2rem;">
+                        <a href="#" class="btn btn-primary" style="background: var(--subj-color); border: none; display: block; text-align: center; font-size: 0.9rem;">Start Quiz</a>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        });
+
+        function getSubjectColor(subject) {
+            const s = subject.toLowerCase();
+            if (s.includes('maths')) return '--subj-maths';
+            if (s.includes('english')) return '--subj-english';
+            if (s.includes('irish')) return '--subj-irish';
+            if (s.includes('biology')) return '--subj-biology';
+            if (s.includes('chemistry')) return '--subj-chemistry';
+            if (s.includes('physics')) return '--subj-physics';
+            if (s.includes('science')) return '--subj-science';
+            if (s.includes('history')) return '--subj-history';
+            if (s.includes('geography')) return '--subj-geography';
+            if (s.includes('business')) return '--subj-business';
+            if (s.includes('french')) return '--subj-french';
+            if (s.includes('german')) return '--subj-german';
+            if (s.includes('religion')) return '--subj-religion';
+            if (s.includes('spanish')) return '--subj-spanish';
+            if (s.includes('home ec')) return '--subj-homeec';
+            if (s.includes('art')) return '--subj-art';
+            if (s.includes('music')) return '--subj-music';
+            return '--subj-default';
+        }
+    </script>
+</body>
+</html>

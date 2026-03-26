@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | SyllabusScorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+    <div class="auth-card">
+        <a href="index.html" style="text-decoration: none; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; display: inline-block;">← Back to Home</a>
+        <h2 style="margin-bottom: 2rem;">Create Your Account</h2>
+        <form class="auth-form" id="signupForm">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email Address" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; border: none; font-size: 1.1rem; cursor: pointer;">Join SyllabusScorer</button>
+        </form>
+        <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">
+            Already have an account? <a href="login.html" style="color: var(--accent-green); text-decoration: none; font-weight: 600;">Log In</a>
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.querySelector('input[type="text"]').value;
+            localStorage.setItem('ss_username', name);
+            // Redirect to subject selection
+            window.location.href = 'subject-selection.html';
+        });
+    </script>
+</body>
+</html>
