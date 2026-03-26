@@ -32,18 +32,11 @@
         import { toSubjectKey } from './pastPapersData.js';
 
         document.addEventListener('DOMContentLoaded', () => {
-            const allSubjects = [
+            const subjects = [
                 'Maths', 'English', 'Irish', 'Biology', 'Chemistry', 'Physics', 
                 'Science', 'History', 'Geography', 'Business', 'French', 
                 'German', 'Religion', 'Spanish', 'Home Ec', 'Art', 'Music'
             ];
-            let subjects = JSON.parse(localStorage.getItem('ss_subjects') || '[]');
-            
-            // Bypass: If no subjects selected (Guest), show everything
-            if (subjects.length === 0) {
-                subjects = allSubjects;
-            }
-
             const container = document.getElementById('subjects-container');
             
             subjects.forEach(subj => {
