@@ -14,7 +14,7 @@
         <ul class="nav-links">
             <li><a href="#">My Progress</a></li>
             <li><a href="#">Settings</a></li>
-            <li><a href="index.html" class="btn btn-secondary">Logout</a></li>
+            <li><a href="#" id="authBtn" class="btn btn-secondary">Log In</a></li>
         </ul>
     </nav>
 
@@ -55,11 +55,54 @@
     </main>
 
     <script src="script.js"></script>
-    <script>
-        const name = localStorage.getItem('ss_username');
-        if (name) {
-            document.getElementById('display-name').textContent = name;
+    <script type="module">
+        import { signOutAndGoHome, supabase } from './supabaseClient.js';
+        const authBtn = document.getElementById('authBtn');
+
+        async function loadName() {
+            const fallback = localStorage.getItem('ss_username');
+            if (fallback) {
+                document.getElementById('display-name').textContent = fallback;
+            }
+
+            const { data } = await supabase.auth.getUser();
+            if (!data?.user) {
+                document.getElementById('display-name').textContent = 'Guest';
+                authBtn.textContent = 'Log In';
+                authBtn.href = 'login.html';
+                return;
+            }
+
+            authBtn.textContent = 'Logout';
+            authBtn.href = '#';
+            const metaName = data?.user?.user_metadata?.full_name || data?.user?.user_metadata?.name;
+            if (metaName) {
+                localStorage.setItem('ss_username', metaName);
+                document.getElementById('display-name').textContent = metaName;
+                return;
+            }
+
+            const userId = data?.user?.id;
+            if (!userId) return;
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('full_name')
+                .eq('id', userId)
+                .maybeSingle();
+
+            if (profile?.full_name) {
+                localStorage.setItem('ss_username', profile.full_name);
+                document.getElementById('display-name').textContent = profile.full_name;
+            }
         }
+
+        await loadName();
+
+        authBtn.addEventListener('click', async (e) => {
+            if (authBtn.textContent !== 'Logout') return;
+            e.preventDefault();
+            await signOutAndGoHome();
+        });
     </script>
 </body>
 </html>

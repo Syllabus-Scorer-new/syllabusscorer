@@ -483,3 +483,86 @@ footer {
 .paper-link.HL { border-left-color: var(--subj-irish); }
 .paper-link.OL { border-left-color: var(--subj-maths); } 
 .paper-link.FL { border-left-color: var(--subj-chemistry); }
+
+/* Past Papers viewer */
+.papers-toolbar {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto 1.5rem;
+    max-width: 900px;
+    flex-wrap: wrap;
+}
+
+.papers-search {
+    flex: 1;
+    min-width: 260px;
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    background: white;
+    font-size: 1rem;
+}
+
+.papers-select {
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    background: white;
+    font-size: 1rem;
+}
+
+.papers-table-wrap {
+    overflow: auto;
+    border-radius: 16px;
+    border: 1px solid var(--border-light);
+    background: white;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+}
+
+.papers-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 780px;
+}
+
+.papers-table th,
+.papers-table td {
+    padding: 1rem 1rem;
+    border-bottom: 1px solid var(--border-light);
+    text-align: left;
+    vertical-align: top;
+}
+
+.papers-table th {
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: #fbfdff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.papers-table tr:hover td {
+    background: #f8fafc;
+}
+
+.papers-link {
+    color: var(--accent-blue);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.papers-link:hover {
+    text-decoration: underline;
+}
+
+.papers-empty code {
+    background: #f1f5f9;
+    padding: 0.1rem 0.35rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-light);
+}

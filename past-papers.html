@@ -28,7 +28,9 @@
     </main>
 
     <script src="script.js"></script>
-    <script>
+    <script type="module">
+        import { toSubjectKey } from './pastPapersData.js';
+
         document.addEventListener('DOMContentLoaded', () => {
             const subjects = JSON.parse(localStorage.getItem('ss_subjects') || '[]');
             const container = document.getElementById('subjects-container');
@@ -41,7 +43,8 @@
             subjects.forEach(subj => {
                 const colorVar = getSubjectColor(subj);
                 const isIrish = subj.toLowerCase().includes('irish');
-                const link = isIrish ? 'irish-past-papers.html' : '#';
+                const subjectKey = toSubjectKey(subj);
+                const link = isIrish ? 'irish-past-papers.html' : `past-papers-subject.html?subject=${encodeURIComponent(subjectKey)}`;
                 
                 const div = document.createElement('div');
                 div.className = 'subject-example roll-item visible';
