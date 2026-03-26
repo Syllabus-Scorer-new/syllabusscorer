@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Papers | SyllabusScorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-offwhite">
+    <nav>
+        <a href="dashboard.html" class="logo">
+            <span class="green-s">S</span>yllabusScorer
+        </a>
+        <ul class="nav-links">
+            <li><a href="past-papers.html">← Back to Subjects</a></li>
+        </ul>
+    </nav>
+
+    <main class="dashboard-page">
+        <h1 class="welcome-title roll-item" id="pageTitle">Past Papers</h1>
+        <div class="study-intro roll-item" id="pageSubtitle">
+            Past papers and marking schemes for your selected subject.
+        </div>
+
+        <div class="papers-toolbar roll-item">
+            <input id="searchInput" class="papers-search" type="search" placeholder="Search year, level, paper…" />
+            <select id="levelFilter" class="papers-select">
+                <option value="">All levels</option>
+                <option value="Higher">Higher</option>
+                <option value="Ordinary">Ordinary</option>
+                <option value="Foundation">Foundation</option>
+                <option value="Common">Common</option>
+            </select>
+        </div>
+
+        <div id="emptyState" class="papers-empty roll-item" style="display:none;">
+            <div class="subject-example" style="grid-column: 1/-1;">
+                <h3 style="margin-bottom: 0.75rem;">No papers added yet</h3>
+                <p style="color: var(--text-muted);">
+                    Add links in <code>pastPapersData.js</code> for this subject, then refresh.
+                </p>
+            </div>
+        </div>
+
+        <div class="papers-table-wrap roll-item">
+            <table class="papers-table" id="papersTable">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Level</th>
+                        <th>Paper</th>
+                        <th>Exam Paper</th>
+                        <th>Marking Scheme</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody id="papersTbody"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script type="module">
+        import { PAST_PAPERS } from './pastPapersData.js';
+
+        const params = new URLSearchParams(window.location.search);
+        const subjectKey = (params.get('subject') || '').trim();
+
+        const subject = PAST_PAPERS[subjectKey];
+        const titleEl = document.getElementById('pageTitle');
+        const subtitleEl = document.getElementById('pageSubtitle');
+        const tbody = document.getElementById('papersTbody');
+        const emptyState = document.getElementById('emptyState');
+        const searchInput = document.getElementById('searchInput');
+        const levelFilter = document.getElementById('levelFilter');
+
+        const displayName = subject?.displayName || subjectKey || 'Past Papers';
+        titleEl.textContent = `${displayName} Past Papers`;
+        subtitleEl.textContent = `Official papers + marking schemes (add your links in pastPapersData.js).`;
+
+        const items = Array.isArray(subject?.items) ? subject.items.slice() : [];
+
+        function linkCell(url, label) {
+            if (!url) return `<span style="color: var(--text-muted);">—</span>`;
+            const safeUrl = String(url);
+            const safeLabel = String(label);
+            return `<a class="papers-link" href="${safeUrl}" target="_blank" rel="noopener noreferrer">${safeLabel}</a>`;
+        }
+
+        function normalize(s) {
+            return String(s || '').toLowerCase().trim();
+        }
+
+        function render() {
+            const q = normalize(searchInput.value);
+            const level = levelFilter.value;
+
+            const filtered = items
+                .filter(it => !level || it.level === level)
+                .filter(it => {
+                    if (!q) return true;
+                    const hay = [
+                        it.year,
+                        it.level,
+                        it.paper,
+                        it.notes
+                    ].map(normalize).join(' ');
+                    return hay.includes(q);
+                })
+                .sort((a, b) => (b.year || 0) - (a.year || 0));
+
+            tbody.innerHTML = '';
+
+            if (filtered.length === 0) {
+                emptyState.style.display = 'block';
+                document.getElementById('papersTable').style.display = 'none';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            document.getElementById('papersTable').style.display = 'table';
+
+            for (const it of filtered) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${it.year ?? ''}</td>
+                    <td>${it.level ?? ''}</td>
+                    <td>${it.paper ?? ''}</td>
+                    <td>${linkCell(it.paperUrl, 'Open')}</td>
+                    <td>${linkCell(it.markingSchemeUrl, 'Open')}</td>
+                    <td>${it.notes ? String(it.notes) : ''}</td>
+                `;
+                tbody.appendChild(tr);
+            }
+        }
+
+        searchInput.addEventListener('input', render);
+        levelFilter.addEventListener('change', render);
+
+        render();
+    </script>
+</body>
+</html>
+
