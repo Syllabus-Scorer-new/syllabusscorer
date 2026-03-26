@@ -17,19 +17,76 @@ export const PAST_PAPERS = {
     displayName: "Maths",
     items: [
       {
-        year: 2024,
-        level: "Higher",
-        paper: "Paper 1",
-        paperUrl: "https://example.com/maths-2024-h-p1.pdf",
-        markingSchemeUrl: "https://example.com/maths-2024-h-p1-marking.pdf",
-        notes: "Sample link — replace with SEC link"
+        year: 2015,
+        level: "Foundation",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/maths/foundationlevel.2015.pdf"
       },
       {
-        year: 2024,
+        year: 2016,
+        level: "Foundation",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/maths/foundationlevel.2016.pdf"
+      },
+      {
+        year: 2017,
+        level: "Foundation",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/maths/foundationlevel.2017.pdf"
+      },
+      {
+        year: 2015,
+        level: "Ordinary",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/maths/ordinarylevel.2015.pdf"
+      },
+      {
+        year: 2016,
+        level: "Ordinary",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/maths/ordinarylevel.2016.pdf"
+      },
+      {
+        year: 2017,
+        level: "Ordinary",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/maths/ordinarylevel.2017.pdf"
+      },
+      {
+        year: 2015,
+        level: "Higher",
+        paper: "Paper 1",
+        paperUrl: "/assets/pdfs/maths/paper12015.pdf"
+      },
+      {
+        year: 2016,
+        level: "Higher",
+        paper: "Paper 1",
+        paperUrl: "/assets/pdfs/maths/paper1.2016.pdf"
+      },
+      {
+        year: 2017,
+        level: "Higher",
+        paper: "Paper 1",
+        paperUrl: "/assets/pdfs/maths/paper1.2017.pdf"
+      },
+      {
+        year: 2015,
         level: "Higher",
         paper: "Paper 2",
-        paperUrl: "https://example.com/maths-2024-h-p2.pdf",
-        markingSchemeUrl: "https://example.com/maths-2024-h-p2-marking.pdf"
+        paperUrl: "/assets/pdfs/maths/paper2.2015.pdf"
+      },
+      {
+        year: 2016,
+        level: "Higher",
+        paper: "Paper 2",
+        paperUrl: "/assets/pdfs/maths/paper2.2016.pdf"
+      },
+      {
+        year: 2017,
+        level: "Higher",
+        paper: "Paper 2",
+        paperUrl: "/assets/pdfs/maths/paper2.2017.pdf"
       }
     ]
   },
