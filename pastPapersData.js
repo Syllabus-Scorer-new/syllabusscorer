@@ -15,80 +15,7 @@
 export const PAST_PAPERS = {
   "maths": {
     displayName: "Maths",
-    items: [
-      {
-        year: 2015,
-        level: "Foundation",
-        paper: "Paper",
-        paperUrl: "/assets/pdfs/maths/foundationlevel.2015.pdf"
-      },
-      {
-        year: 2016,
-        level: "Foundation",
-        paper: "Paper",
-        paperUrl: "/assets/pdfs/maths/foundationlevel.2016.pdf"
-      },
-      {
-        year: 2017,
-        level: "Foundation",
-        paper: "Paper",
-        paperUrl: "/assets/pdfs/maths/foundationlevel.2017.pdf"
-      },
-      {
-        year: 2015,
-        level: "Ordinary",
-        paper: "Paper",
-        paperUrl: "/assets/pdfs/maths/ordinarylevel.2015.pdf"
-      },
-      {
-        year: 2016,
-        level: "Ordinary",
-        paper: "Paper",
-        paperUrl: "/assets/pdfs/maths/ordinarylevel.2016.pdf"
-      },
-      {
-        year: 2017,
-        level: "Ordinary",
-        paper: "Paper",
-        paperUrl: "/assets/pdfs/maths/ordinarylevel.2017.pdf"
-      },
-      {
-        year: 2015,
-        level: "Higher",
-        paper: "Paper 1",
-        paperUrl: "/assets/pdfs/maths/paper12015.pdf"
-      },
-      {
-        year: 2016,
-        level: "Higher",
-        paper: "Paper 1",
-        paperUrl: "/assets/pdfs/maths/paper1.2016.pdf"
-      },
-      {
-        year: 2017,
-        level: "Higher",
-        paper: "Paper 1",
-        paperUrl: "/assets/pdfs/maths/paper1.2017.pdf"
-      },
-      {
-        year: 2015,
-        level: "Higher",
-        paper: "Paper 2",
-        paperUrl: "/assets/pdfs/maths/paper2.2015.pdf"
-      },
-      {
-        year: 2016,
-        level: "Higher",
-        paper: "Paper 2",
-        paperUrl: "/assets/pdfs/maths/paper2.2016.pdf"
-      },
-      {
-        year: 2017,
-        level: "Higher",
-        paper: "Paper 2",
-        paperUrl: "/assets/pdfs/maths/paper2.2017.pdf"
-      }
-    ]
+    items: []
   },
   "english": {
     displayName: "English",
@@ -96,7 +23,80 @@ export const PAST_PAPERS = {
   },
   "irish": {
     displayName: "Irish",
-    items: []
+    items: [
+      {
+        year: 2015,
+        level: "Foundation",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/irish/foundationlevel.2015.pdf"
+      },
+      {
+        year: 2016,
+        level: "Foundation",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/irish/foundationlevel.2016.pdf"
+      },
+      {
+        year: 2017,
+        level: "Foundation",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/irish/foundationlevel.2017.pdf"
+      },
+      {
+        year: 2015,
+        level: "Ordinary",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/irish/ordinarylevel.2015.pdf"
+      },
+      {
+        year: 2016,
+        level: "Ordinary",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/irish/ordinarylevel.2016.pdf"
+      },
+      {
+        year: 2017,
+        level: "Ordinary",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/irish/ordinarylevel.2017.pdf"
+      },
+      {
+        year: 2015,
+        level: "Higher",
+        paper: "Paper 1",
+        paperUrl: "/assets/pdfs/irish/paper12015.pdf"
+      },
+      {
+        year: 2016,
+        level: "Higher",
+        paper: "Paper 1",
+        paperUrl: "/assets/pdfs/irish/paper1.2016.pdf"
+      },
+      {
+        year: 2017,
+        level: "Higher",
+        paper: "Paper 1",
+        paperUrl: "/assets/pdfs/irish/paper1.2017.pdf"
+      },
+      {
+        year: 2015,
+        level: "Higher",
+        paper: "Paper 2",
+        paperUrl: "/assets/pdfs/irish/paper2.2015.pdf"
+      },
+      {
+        year: 2016,
+        level: "Higher",
+        paper: "Paper 2",
+        paperUrl: "/assets/pdfs/irish/paper2.2016.pdf"
+      },
+      {
+        year: 2017,
+        level: "Higher",
+        paper: "Paper 2",
+        paperUrl: "/assets/pdfs/irish/paper2.2017.pdf"
+      }
+    ]
   }
 };
 

@@ -14,7 +14,7 @@
         <ul class="nav-links">
             <li><a href="#">My Progress</a></li>
             <li><a href="#">Settings</a></li>
-            <li><a href="#" id="logoutBtn" class="btn btn-secondary">Logout</a></li>
+            <li><a href="#" id="authBtn" class="btn btn-secondary">Log In</a></li>
         </ul>
     </nav>
 
@@ -56,9 +56,8 @@
 
     <script src="script.js"></script>
     <script type="module">
-        import { requireSessionOrRedirect, signOutAndGoHome, supabase } from './supabaseClient.js';
-
-        await requireSessionOrRedirect('login.html');
+        import { signOutAndGoHome, supabase } from './supabaseClient.js';
+        const authBtn = document.getElementById('authBtn');
 
         async function loadName() {
             const fallback = localStorage.getItem('ss_username');
@@ -67,6 +66,15 @@
             }
 
             const { data } = await supabase.auth.getUser();
+            if (!data?.user) {
+                document.getElementById('display-name').textContent = 'Guest';
+                authBtn.textContent = 'Log In';
+                authBtn.href = 'login.html';
+                return;
+            }
+
+            authBtn.textContent = 'Logout';
+            authBtn.href = '#';
             const metaName = data?.user?.user_metadata?.full_name || data?.user?.user_metadata?.name;
             if (metaName) {
                 localStorage.setItem('ss_username', metaName);
@@ -90,7 +98,8 @@
 
         await loadName();
 
-        document.getElementById('logoutBtn').addEventListener('click', async (e) => {
+        authBtn.addEventListener('click', async (e) => {
+            if (authBtn.textContent !== 'Logout') return;
             e.preventDefault();
             await signOutAndGoHome();
         });
