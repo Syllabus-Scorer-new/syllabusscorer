@@ -32,14 +32,20 @@
         import { toSubjectKey } from './pastPapersData.js';
 
         document.addEventListener('DOMContentLoaded', () => {
-            const subjects = JSON.parse(localStorage.getItem('ss_subjects') || '[]');
-            const container = document.getElementById('subjects-container');
+            const allSubjects = [
+                'Maths', 'English', 'Irish', 'Biology', 'Chemistry', 'Physics', 
+                'Science', 'History', 'Geography', 'Business', 'French', 
+                'German', 'Religion', 'Spanish', 'Home Ec', 'Art', 'Music'
+            ];
+            let subjects = JSON.parse(localStorage.getItem('ss_subjects') || '[]');
             
+            // Bypass: If no subjects selected (Guest), show everything
             if (subjects.length === 0) {
-                container.innerHTML = '<div class="roll-item" style="grid-column: 1/-1;"><p>No subjects selected. <a href="subject-selection.html" style="color: var(--accent-green);">Click here to select subjects.</a></p></div>';
-                return;
+                subjects = allSubjects;
             }
 
+            const container = document.getElementById('subjects-container');
+            
             subjects.forEach(subj => {
                 const colorVar = getSubjectColor(subj);
                 const isIrish = subj.toLowerCase().includes('irish');
