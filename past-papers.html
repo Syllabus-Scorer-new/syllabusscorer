@@ -40,6 +40,9 @@
 
             subjects.forEach(subj => {
                 const colorVar = getSubjectColor(subj);
+                const isIrish = subj.toLowerCase().includes('irish');
+                const link = isIrish ? 'irish-past-papers.html' : '#';
+                
                 const div = document.createElement('div');
                 div.className = 'subject-example roll-item visible';
                 div.style.setProperty('--subj-color', `var(${colorVar})`);
@@ -49,7 +52,7 @@
                         <p style="color: var(--text-muted); font-size: 0.9rem;">State Examinations Commission papers</p>
                     </div>
                     <div style="margin-top: 1.5rem; text-align: right;">
-                        <a href="#" class="btn btn-primary" style="background: var(--subj-color); border: none; font-size: 0.85rem; padding: 0.6rem 1.5rem;">View Papers</a>
+                        <a href="${link}" class="btn btn-primary" style="background: var(--subj-color); border: none; font-size: 0.85rem; padding: 0.6rem 1.5rem;">View Papers</a>
                     </div>
                 `;
                 container.appendChild(div);
