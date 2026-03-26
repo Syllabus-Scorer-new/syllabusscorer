@@ -22,27 +22,41 @@
             Select your subject to access official examination papers and marking schemes from the State Examinations Commission.
         </div>
         
-        <div id="subjects-container" class="choices-grid">
+        <div class="tabs roll-item" style="margin-top: 2rem;">
+            <button class="tab-btn active" id="lc-btn" onclick="setLevel('lc')">Leaving Cert</button>
+            <button class="tab-btn" id="jc-btn" onclick="setLevel('jc')">Junior Cycle</button>
+        </div>
+        
+        <div id="subjects-container" class="choices-grid" style="margin-top: 2rem;">
             <!-- Dynamic Subjects -->
         </div>
     </main>
 
     <script src="script.js"></script>
-    <script type="module">
-        import { toSubjectKey } from './pastPapersData.js';
+    <script>
+        let currentLevel = localStorage.getItem('ss_level') || 'lc';
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const subjects = [
-                'Maths', 'English', 'Irish', 'Biology', 'Chemistry', 'Physics', 
-                'Science', 'History', 'Geography', 'Business', 'French', 
-                'German', 'Religion', 'Spanish', 'Home Ec', 'Art', 'Music'
-            ];
+        function setLevel(lvl) {
+            currentLevel = lvl;
+            localStorage.setItem('ss_level', lvl);
+            
+            // Update tabs
+            document.getElementById('lc-btn').classList.toggle('active', lvl === 'lc');
+            document.getElementById('jc-btn').classList.toggle('active', lvl === 'jc');
+            
+            renderSubjects();
+        }
+
+        function renderSubjects() {
             const container = document.getElementById('subjects-container');
+            container.innerHTML = '';
+            
+            const subjects = currentLevel === 'lc' ? window.LC_SUBJECTS : window.JC_SUBJECTS;
             
             subjects.forEach(subj => {
-                const colorVar = getSubjectColor(subj);
+                const colorVar = window.getSubjectColor(subj);
                 const isIrish = subj.toLowerCase().includes('irish');
-                const subjectKey = toSubjectKey(subj);
+                const subjectKey = window.toSubjectKey(subj);
                 const link = isIrish ? 'irish-past-papers.html' : `past-papers-subject.html?subject=${encodeURIComponent(subjectKey)}`;
                 
                 const div = document.createElement('div');
@@ -59,29 +73,11 @@
                 `;
                 container.appendChild(div);
             });
-        });
-
-        function getSubjectColor(subject) {
-            const s = subject.toLowerCase();
-            if (s.includes('maths')) return '--subj-maths';
-            if (s.includes('english')) return '--subj-english';
-            if (s.includes('irish')) return '--subj-irish';
-            if (s.includes('biology')) return '--subj-biology';
-            if (s.includes('chemistry')) return '--subj-chemistry';
-            if (s.includes('physics')) return '--subj-physics';
-            if (s.includes('science')) return '--subj-science';
-            if (s.includes('history')) return '--subj-history';
-            if (s.includes('geography')) return '--subj-geography';
-            if (s.includes('business')) return '--subj-business';
-            if (s.includes('french')) return '--subj-french';
-            if (s.includes('german')) return '--subj-german';
-            if (s.includes('religion')) return '--subj-religion';
-            if (s.includes('spanish')) return '--subj-spanish';
-            if (s.includes('home ec')) return '--subj-homeec';
-            if (s.includes('art')) return '--subj-art';
-            if (s.includes('music')) return '--subj-music';
-            return '--subj-default';
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setLevel(currentLevel);
+        });
     </script>
 </body>
 </html>

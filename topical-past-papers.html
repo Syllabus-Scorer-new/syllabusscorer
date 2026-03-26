@@ -22,37 +22,51 @@
             Master the syllabus by practicing past paper questions organized specifically by subject area and theme.
         </div>
         
-        <div id="subjects-container" class="choices-grid">
-            <!-- Dynamic Subjects -->
+        <div class="tabs roll-item" style="margin-top: 2rem;">
+            <button class="tab-btn active" id="lc-btn" onclick="setLevel('lc')">Leaving Cert</button>
+            <button class="tab-btn" id="jc-btn" onclick="setLevel('jc')">Junior Cycle</button>
+        </div>
+        
+        <div id="subjects-container" class="choices-grid" style="margin-top: 2rem;">
+            <!-- Dynamic Topics -->
         </div>
     </main>
 
     <script src="script.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const subjects = [
-                'Maths', 'English', 'Irish', 'Biology', 'Chemistry', 'Physics', 
-                'Science', 'History', 'Geography', 'Business', 'French', 
-                'German', 'Religion', 'Spanish', 'Home Ec', 'Art', 'Music'
-            ];
+        let currentLevel = localStorage.getItem('ss_level') || 'lc';
+
+        function setLevel(lvl) {
+            currentLevel = lvl;
+            localStorage.setItem('ss_level', lvl);
+            document.getElementById('lc-btn').classList.toggle('active', lvl === 'lc');
+            document.getElementById('jc-btn').classList.toggle('active', lvl === 'jc');
+            renderSubjects();
+        }
+
+        function renderSubjects() {
             const container = document.getElementById('subjects-container');
+            container.innerHTML = '';
+            const subjects = currentLevel === 'lc' ? window.LC_SUBJECTS : window.JC_SUBJECTS;
             
             subjects.forEach(subj => {
-                const colorVar = getSubjectColor(subj);
+                const colorVar = window.getSubjectColor(subj);
                 const div = document.createElement('div');
-                div.className = 'subject-example roll-item visible';
+                div.className = 'choice-box roll-item visible';
                 div.style.setProperty('--subj-color', `var(${colorVar})`);
                 div.innerHTML = `
-                    <div>
-                        <h3 style="color: var(--subj-color); margin-bottom: 0.5rem;">${subj}</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Practice by chapter and theme</p>
-                    </div>
-                    <div style="margin-top: 1.5rem; text-align: right;">
-                        <a href="#" class="btn btn-primary" style="background: var(--subj-color); border: none; font-size: 0.85rem; padding: 0.6rem 1.5rem;">Study Topics</a>
+                    <div class="choice-icon" style="color: var(--subj-color);">📂</div>
+                    <div class="choice-content">
+                        <h3>${subj}</h3>
+                        <p>Questions organized by chapter and specific exam topics.</p>
                     </div>
                 `;
                 container.appendChild(div);
             });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setLevel(currentLevel);
         });
 
         function getSubjectColor(subject) {
