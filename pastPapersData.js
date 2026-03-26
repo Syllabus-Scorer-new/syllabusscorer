@@ -95,6 +95,54 @@ export const PAST_PAPERS = {
         level: "Higher",
         paper: "Paper 2",
         paperUrl: "/assets/pdfs/irish/paper2.2017.pdf"
+      },
+      {
+        year: 2014,
+        level: "Foundation",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/irish/foundationlevel.2014.pdf"
+      },
+      {
+        year: 2013,
+        level: "Foundation",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/irish/foundationlevel.2013.pdf"
+      },
+      {
+        year: 2014,
+        level: "Ordinary",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/irish/ordinarylevel.2014.pdf"
+      },
+      {
+        year: 2013,
+        level: "Ordinary",
+        paper: "Paper",
+        paperUrl: "/assets/pdfs/irish/ordinarylevel.2013.pdf"
+      },
+      {
+        year: 2014,
+        level: "Higher",
+        paper: "Paper 1",
+        paperUrl: "/assets/pdfs/irish/higherlevel.p1.2014.pdf"
+      },
+      {
+        year: 2013,
+        level: "Higher",
+        paper: "Paper 1",
+        paperUrl: "/assets/pdfs/irish/higherlevel.p1.2013.pdf"
+      },
+      {
+        year: 2014,
+        level: "Higher",
+        paper: "Paper 2",
+        paperUrl: "/assets/pdfs/irish/higherlevel.p2.2014.pdf"
+      },
+      {
+        year: 2013,
+        level: "Higher",
+        paper: "Paper 2",
+        paperUrl: "/assets/pdfs/irish/higherlevel.p2.2013.pdf"
       }
     ]
   }
